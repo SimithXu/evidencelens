@@ -74,6 +74,26 @@ export async function validate_model_review(result,case_,sources){
  if(sources.some(s=>['buyer_nonreceipt','partial_delivery'].includes(s.assertion)&&!used.has(s.source_id)))throw new Error('The model omitted annotated adverse evidence.');
  return {claims,contradictions,gaps,warnings,semantic_risks:checked.semantic_risks,citation_integrity_verified:true,semantic_support_verified:false,human_review_required:true};
 }
+// Only these fixed validator messages may influence public diagnostics. Never echo
+// provider output, source text, identifiers, or arbitrary exception messages.
+const REVIEW_REJECTIONS=new Map([
+ ['Invalid citation list.', ['citation_shape','Citation list is invalid.']],
+ ['Quote citations require source_id, quote, and occurrence only.', ['citation_shape','Citation fields are invalid.']],
+ ['Unknown citation source.', ['citation_source','A citation references an unknown source.']],
+ ['Invalid quote or occurrence.', ['citation_index','A quote or zero-based occurrence index is invalid.']],
+ ['Quote occurrence does not exist.', ['citation_match','An exact quote or its occurrence was not found in its source.']],
+ ['Invalid model text.', ['review_text','A review text field is empty, invalid, or too long.']],
+ ['Incomplete model review.', ['review_shape','Required review collections are missing or unexpected.']],
+ ['Invalid model review collection.', ['review_collection','A review collection is invalid or exceeds its limit.']],
+ ['Invalid model claim.', ['claim_shape','A claim has an invalid shape.']],
+ ['Model claims must cite evidence.', ['claim_uncited','A claim lacks a citation.']],
+ ['Invalid model finding.', ['finding_shape','A finding has an invalid shape.']],
+ ['Contradictions require citations from two distinct sources.', ['contradiction_sources','A contradiction does not cite two distinct sources.']],
+ ['Uncited gap must explicitly identify missing evidence.', ['gap_missing_flag','An uncited gap is not marked as missing evidence.']],
+ ['The model omitted or only partially cited annotated adverse evidence.', ['adverse_coverage','Annotated adverse evidence was omitted or not quoted in full.']],
+ ['The model omitted annotated adverse evidence.', ['adverse_coverage','Annotated adverse evidence was omitted or not quoted in full.']],
+]);
+function rejectedReview(code,detail){return new AdapterError(`AI review rejected [${code}]: ${detail} Suggestions were rejected; existing draft was left unchanged.`);}
 async function fingerprint(provider,env){
  const config=ai_configuration(env);const values=provider==='paypal'?[env.PAYPAL_CLIENT_ID,env.PAYPAL_CLIENT_SECRET]:[config.provider_key,env[config.credential_env],env[config.model_env]];
  if(!values.every(Boolean))return null;const hash=await crypto.subtle.digest('SHA-256',encoder.encode(JSON.stringify(values)));return Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('');
@@ -113,7 +133,11 @@ export function createAdapters(env={}, {fetch:fetchImpl=globalThis.fetch,observa
    if(response.status!=='completed')throw new AdapterError('AI review was not completed. Existing draft was left unchanged.');
    const texts=[],output=Object.hasOwn(response,'output')?response.output:[];if(!Array.isArray(output))throw new AdapterError('AI returned an unexpected response shape.');
    for(const item of output){if(!object(item)||!Array.isArray(Object.hasOwn(item,'content')?item.content:[]))throw new AdapterError('AI returned an unexpected response shape.');for(const content of (Object.hasOwn(item,'content')?item.content:[])){if(!object(content))throw new AdapterError('AI returned an unexpected response shape.');if(content.type==='refusal')throw new AdapterError('AI declined this review. Existing draft was left unchanged.');if(content.type==='output_text'&&typeof content.text==='string')texts.push(content.text);}}
-   let result;try{const decoded=_decode(texts.join(''));result=await validate_model_review(Array.isArray(decoded)?decoded[0]:decoded,case_,sources);}catch{throw new AdapterError('AI review contained invalid citations, incomplete findings, or omitted annotated adverse evidence. Suggestions were rejected; existing draft was left unchanged.');}
+   let decoded;try{decoded=_decode(texts.join(''));}catch{throw rejectedReview('review_json','The review was not valid strict JSON.');}
+   let result;try{result=await validate_model_review(Array.isArray(decoded)?decoded[0]:decoded,case_,sources);}catch(error){
+    const [code,detail]=REVIEW_REJECTIONS.get(error?.message)||['review_validation','The review failed source-integrity or validation checks.'];
+    throw rejectedReview(code,detail);
+   }
    return {...result,mode:'model',provider:config.provider,provider_key:config.provider_key,model,response_id:response.id??null,generated_at:utc_now(),warnings:[...result.warnings,'Actual model output; not human reviewed. Exact quote checks and full adverse-source coverage do not establish authenticity, completeness, or semantic support.']};
   });}
  };

@@ -8,6 +8,8 @@ Review a dispute against its original sources, retain contradictory evidence, an
 
 ## Try the workflow
 
+[Open the live public demo](https://evidencelens-preview.goodchick14.chatgpt.site) — no ChatGPT login required.
+
 1. Open the app and choose **Review sample**. No ChatGPT login is required.
 2. Compare the seller's claim of ten delivered files with the buyer's report of four present and six missing.
 3. Inspect exact source quotations, contradictions, and missing evidence.
@@ -30,7 +32,7 @@ npm start
 
 Open **http://127.0.0.1:8787**; stop with Ctrl+C. Without credentials, the deterministic sample works for free, while external integrations report missing configuration. The development bridge binds only to loopback, checks the Host header, and strips claimed platform identity. Do not expose it publicly.
 
-`npm test` builds and runs 103 automated tests. Parity tests compare 13 complete Python/JavaScript snapshots using the included `tests/oracle/engine.py`. Artifact checks exercise the built Worker without live calls. `npm run build` creates `dist/server/index.js`; generated bundles are not source-controlled.
+`npm test` builds and runs 116 automated tests. Parity tests compare 13 complete Python/JavaScript snapshots using the included `tests/oracle/engine.py`. Artifact checks exercise the built Worker without live calls. `npm run build` creates `dist/server/index.js`; generated bundles are not source-controlled.
 
 ### Optional backend integrations
 
@@ -57,16 +59,18 @@ For a Worker-compatible host, deploy the built ESM fetch handler and configure e
 
 | Component | Evidence / limit |
 | --- | --- |
-| Clean public source | 103 automated tests, 13 parity snapshots, and artifact checks pass |
+| Clean public source | 116 automated tests, 13 parity snapshots, and artifact checks pass |
 | Direct real DeepSeek text adapter | Passed; output accepted by citation/adverse-evidence validation, not human-approved |
 | Direct real DeepSeek image extraction | Passed on a four-line synthetic fixture; preserved four present and six missing |
-| Hosted public website, desktop browser | v17 passed the Sandbox → imported evidence → real text-model review → human review → JSON export path at 09:35 UTC |
+| Hosted public website, desktop browser | v20 passed the combined Sandbox → evidence → real screenshot OCR → synthetic-labeled admission → real AI review → review controls → JSON/TXT export path at 09:59–10:00 UTC |
 | PayPal | Real Sandbox test-case read passed through the hosted website; read-only, no submission or payment |
 | License | MIT, copyright © 2026 SimithXu |
 
-The hosted desktop-browser check read a Sandbox test case in `WAITING_FOR_SELLER_RESPONSE`, imported four simulated records, and received an actual DeepSeek review containing ten claims, two conflicts, and five gaps. One AI claim was added to the draft as unreviewed and its exact citation inspected. Checking one of six claims recorded 1/6 reviewed; editing that claim reset the count to 0/6. The downloaded JSON contained six draft claims and five sources, real model metadata, and current-isolate response-origin provenance marked verified. Semantic support remained false, `review_complete` remained false, and synthetic-material status remained true. This was a successful draft-export workflow, **not completed human review or permission to submit**.
+The final hosted desktop-browser check read a real Sandbox test case, imported four simulated records, and ran actual OCR on a synthetic PNG. Its four extracted lines were inspected, explicitly marked synthetic, and admitted after checking the transcription-review control. An actual DeepSeek review was accepted with five claims, two contradictions, and three gaps. A partial-delivery AI claim was added as unreviewed and its exact derived-text citation inspected. Checking one of six draft claims recorded 1/6 reviewed; editing that claim reset the count to 0/6. Both JSON and TXT drafts were downloaded.
 
-Hosted screenshot selection and real OCR passed at 09:42 UTC, correctly extracting all four fixture lines. The explicit synthetic-label fix is implemented in v19, but hosted image-derived evidence admission remains pending final verification; this is not yet a complete image-intake/export E2E result. Direct real-provider image extraction also passed separately. Mobile/browser-matrix checks are not claimed. The v19 source passed 103 automated tests and 13 parity snapshots. Tests use mocks where appropriate. No provider credentials are bundled. Configured credentials, accepted model output, browser workflow success, and human approval are separate milestones.
+The parsed JSON contained six draft claims and six sources. Current-isolate AI response-origin provenance was verified, but semantic support remained false and `review_complete` remained false. The image-derived source retained `synthetic: true`, its original-image hash, `reviewed: true`, `corrected: false`, and authenticity unverified. This was an **automated demonstration of review controls**, not independent human validation, completed review, or permission to submit.
+
+Earlier model attempts were rejected by validation; the final acceptance does not guarantee future model output will pass or establish semantic correctness. Citation, provenance, and adverse-evidence guards remain enforced. Direct real-provider text and image checks also passed separately. Mobile/browser-matrix checks are not claimed. The v20 source passed 116 automated tests, 13 parity snapshots, and built-artifact checks. Tests use mocks where appropriate. No provider credentials are bundled. Configured credentials, accepted model output, browser workflow success, and human approval are separate milestones.
 
 ## Architecture
 
