@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "case_id": "PP-R-DEMO-10000001",
+  "order_id": "DEMOORDER000000001",
+  "notice": "Every entry in this file is synthetic demonstration material. These statements were not obtained from PayPal or a real buyer/seller and must never be submitted as genuine evidence.",
+  "evidence": [
+    {
+      "id": "demo-delivery",
+      "label": "Seller delivery message",
+      "kind": "delivery",
+      "occurred_at": "2026-10-23T15:43:00Z",
+      "synthetic": true,
+      "assertion": "seller_delivery_claim",
+      "text": "[SIMULATED] Seller: I have uploaded all 10 service files to the project folder. Please check the delivery link."
+    },
+    {
+      "id": "demo-buyer-reply",
+      "label": "Buyer access complaint",
+      "kind": "chat",
+      "occurred_at": "2026-10-23T15:45:00Z",
+      "synthetic": true,
+      "assertion": "buyer_nonreceipt",
+      "text": "[SIMULATED] Buyer: The delivery link says access denied. I cannot open the service files."
+    },
+    {
+      "id": "demo-partial-delivery",
+      "label": "Buyer partial-delivery report",
+      "kind": "chat",
+      "occurred_at": "2026-10-23T15:47:00Z",
+      "synthetic": true,
+      "assertion": "partial_delivery",
+      "text": "[SIMULATED] Buyer: I can now open the folder, but only 4 of the 10 agreed files are present. The other 6 are still missing."
+    },
+    {
+      "id": "demo-seller-followup",
+      "label": "Seller follow-up",
+      "kind": "chat",
+      "occurred_at": "2026-10-23T15:48:00Z",
+      "synthetic": true,
+      "text": "[SIMULATED] Seller: Thank you for letting me know. I will check the folder permissions and the missing files."
+    }
+  ]
+}

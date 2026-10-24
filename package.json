@@ -1,0 +1,16 @@
+{
+  "name": "evidencelens",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test tests/*.test.mjs",
+    "test:parity": "node tests/engine-parity.mjs",
+    "start": "npm run build && node --env-file-if-exists=.env scripts/serve.mjs",
+    "test:artifact": "node scripts/validate-artifact.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "case_id": "PP-R-DEMO-10000001",
+  "order_id": "DEMOORDER000000001",
+  "evidence": [
+    {
+      "id": "replace-with-unique-label",
+      "label": "Replace with a descriptive source label",
+      "kind": "note",
+      "occurred_at": "2026-10-23T15:48:00Z",
+      "synthetic": true,
+      "assertion": "",
+      "text": "[TEMPLATE — NOT REAL EVIDENCE] Replace with the exact source text; set synthetic false only for actual records."
+    }
+  ]
+}

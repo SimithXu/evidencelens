@@ -1,0 +1,10 @@
+// Structural visual-system regressions, not a substitute for real viewport QA.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const css=read('public/styles.css'),html=read('public/index.html');
+test('one consolidated neutral system removes retired global shell and stacked repair layers',()=>{assert.doesNotMatch(css,/\.sidebar|\.topbar|\.workspace-label|Hierarchy repair|Single-case contest demo/);assert.equal([...css.matchAll(/:root\{/g)].length,1);assert.match(css,/--bg:#f5f6f7/);assert.match(css,/--ink:#24292f/);assert.match(css,/\.panel\{[^}]*border-radius:8px[^}]*box-shadow:none/);assert.ok(css.length<30000);});
+test('overview uses a 60/40 grid and flat source rows with restrained risk accents',()=>{assert.match(css,/\.workspace-grid\{[^}]*grid-template-columns:minmax\(0,3fr\) minmax\(0,2fr\)[^}]*gap:24px/);assert.match(css,/\.source-card\{[^}]*border:0;[^}]*border-bottom:1px solid var\(--line\)[^}]*border-radius:0/);assert.match(css,/\.priority-item\{background:#ffffff;border:0;border-left:2px/);});
+test('case identity precedes compact provenance and controls retain existing IDs',()=>{assert.ok(html.indexOf('class="case-summary-strip"')<html.indexOf('class="notice provenance-notice"'));for(const id of ['page-title','page-subtitle','provenance-title','provenance-detail','session-reminder','primary-review-cta','open-import'])assert.equal([...html.matchAll(new RegExp('id="'+id+'"','g'))].length,1);assert.match(css,/\.demo-header\{min-height:60px/);assert.match(css,/\.case-navigation \.nav-item\{[^}]*min-height:48px/);});
+test('mobile source navigation has small scroll offsets rather than a retired sticky header offset',()=>{assert.doesNotMatch(css,/scroll-margin-top:1(?:45|50)px/);assert.match(css,/\.review-inspector\{position:static;[^}]*scroll-margin-top:16px/);assert.match(css,/\.claim-card,\.claim-text\{scroll-margin-top:16px/);assert.match(css,/@media\(max-width:950px\)/);});

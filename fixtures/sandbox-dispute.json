@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "kind": "historical_sandbox_snapshot",
+    "note": "Sanitized reconstruction of fields observed in successful PayPal Sandbox calls on 2026-10-23. This is not the original API response, not production data, and not a live fetch. All order, capture, buyer-transaction and dispute identifiers are synthetic replacements. Personal information, messages and evidence bodies are omitted. The initial dispute list was empty; the dispute appeared after roughly three minutes."
+  },
+  "order": {
+    "id": "DEMOORDER000000001",
+    "create_time": "2026-10-23T15:35:56Z"
+  },
+  "capture": {
+    "id": "DEMOCAPTURE000001",
+    "status": "COMPLETED",
+    "create_time": "2026-10-23T15:41:55Z"
+  },
+  "dispute": {
+    "dispute_id": "PP-R-DEMO-10000001",
+    "create_time": "2026-10-23T15:50:04.629Z",
+    "reason": "MERCHANDISE_OR_SERVICE_NOT_RECEIVED",
+    "status": "UNDER_REVIEW",
+    "dispute_state": "UNDER_PAYPAL_REVIEW",
+    "dispute_life_cycle_stage": "INQUIRY",
+    "dispute_amount": {"currency_code": "USD", "value": "1.00"},
+    "disputed_transactions": [
+      {
+        "seller_transaction_id": "DEMOCAPTURE000001",
+        "buyer_transaction_id": "DEMOBUYER00000001",
+        "item_type": "SERVICE"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "dispute_id": "PP-SYNTHETIC-NATIVE-AUDIT",
+  "create_time": "2026-10-23T15:50:04.629Z",
+  "update_time": "2026-10-23T16:01:00Z",
+  "reason": "MERCHANDISE_OR_SERVICE_NOT_RECEIVED",
+  "status": "UNDER_REVIEW",
+  "dispute_state": "UNDER_PAYPAL_REVIEW",
+  "dispute_life_cycle_stage": "INQUIRY",
+  "dispute_amount": {"value": "2.00", "currency_code": "USD"},
+  "disputed_transactions": [
+    {"seller_transaction_id": "SYNTHETIC-CAPTURE-1", "buyer_transaction_id": "SYNTHETIC-BUYER-1", "item_type": "SERVICE"},
+    {"seller_transaction_id": "SYNTHETIC-CAPTURE-2", "buyer_transaction_id": "SYNTHETIC-BUYER-2", "item_type": "SERVICE"}
+  ],
+  "messages": [
+    {"posted_by": "BUYER", "time_posted": "2026-10-23T15:48:00Z", "content": "[SYNTHETIC TEST] Only 4 of 10 files arrived. \u53ea\u6536\u52304\u4efd\u3002"},
+    {"posted_by": "SELLER", "time_posted": "2026-10-23T15:49:00Z", "content": "[SYNTHETIC TEST] I will investigate missing files."}
+  ],
+  "evidences": [
+    {"evidence_type": "OTHER", "notes": "[SYNTHETIC TEST] Shape is illustrative, not API schema conformance proof.", "documents": [{"name": "not-downloaded.pdf"}]}
+  ],
+  "fixture_notice": "Entirely synthetic native-shape audit fixture. Not a fetched PayPal response. Unknown content is retained and flagged, not guessed or semantically extracted."
+}

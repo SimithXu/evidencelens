@@ -1,0 +1,8 @@
+.env*
+!.env.example
+node_modules/
+dist/
+worker/embedded.js
+worker/index.js
+__pycache__/
+*.pyc

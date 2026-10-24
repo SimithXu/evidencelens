@@ -1,0 +1,207 @@
+{
+  "claims": [
+    {
+      "text": "The dispute API snapshot records a merchandise-or-service-not-received dispute PP-R-DEMO-10000001 linked to order DEMOORDER000000001, with status UNDER_REVIEW and amount USD 1.00.",
+      "citations": [
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"dispute_id\": \"PP-R-DEMO-10000001\"",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"reason\": \"MERCHANDISE_OR_SERVICE_NOT_RECEIVED\"",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"value\": \"1.00\"",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"status\": \"UNDER_REVIEW\"",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "text": "The snapshot describes the transaction as a capture with status COMPLETED and an item_type of SERVICE; the snapshot's own provenance note says it is a sanitized, historical sandbox reconstruction, not an original API response or live production data.",
+      "citations": [
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"status\": \"COMPLETED\"",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"item_type\": \"SERVICE\"",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "\"kind\": \"historical_sandbox_snapshot\"",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "This is not the original API response, not production data, and not a live fetch.",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "text": "The snapshot states the initial dispute list was empty and the dispute appeared roughly three minutes later.",
+      "citations": [
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "The initial dispute list was empty; the dispute appeared after roughly three minutes.",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "text": "The seller delivery message (synthetic) asserts that all 10 service files were uploaded to the project folder and invites the buyer to check the delivery link.",
+      "citations": [
+        {
+          "source_id": "src-22691609f620abb14c0e75f8",
+          "quote": "[SIMULATED] Seller: I have uploaded all 10 service files to the project folder. Please check the delivery link.",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "text": "The buyer access complaint (synthetic) states the delivery link returned access denied and that the buyer could not open the service files.",
+      "citations": [
+        {
+          "source_id": "src-b0a90b0acb8578b8cca756a4",
+          "quote": "[SIMULATED] Buyer: The delivery link says access denied. I cannot open the service files.",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "text": "The buyer partial-delivery report (synthetic) states the buyer could open the folder but only 4 of 10 agreed files were present, with 6 missing.",
+      "citations": [
+        {
+          "source_id": "src-4538c2fe35e1dc16d67dd674",
+          "quote": "[SIMULATED] Buyer: I can now open the folder, but only 4 of the 10 agreed files are present. The other 6 are still missing.",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "text": "The seller follow-up (synthetic) acknowledges the buyer's message and says the seller will check folder permissions and the missing files.",
+      "citations": [
+        {
+          "source_id": "src-a225a62b33847e8008e31d24",
+          "quote": "[SIMULATED] Seller: Thank you for letting me know. I will check the folder permissions and the missing files.",
+          "occurrence": 0
+        }
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "title": "Seller says all 10 files delivered vs buyer says only 4 present",
+      "detail": "The seller's synthetic message asserts all 10 service files were uploaded, while the buyer's synthetic partial-delivery report says only 4 of 10 files are present and 6 remain missing. Partial delivery of 4 is not equivalent to delivery of all 10.",
+      "citations": [
+        {
+          "source_id": "src-22691609f620abb14c0e75f8",
+          "quote": "[SIMULATED] Seller: I have uploaded all 10 service files to the project folder. Please check the delivery link.",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4538c2fe35e1dc16d67dd674",
+          "quote": "[SIMULATED] Buyer: I can now open the folder, but only 4 of the 10 agreed files are present. The other 6 are still missing.",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "title": "Buyer initially could not open anything vs later could open the folder",
+      "detail": "The buyer's earlier synthetic chat reports access denied and inability to open the files; the later synthetic chat reports the folder can now be opened but only partially populated. The two buyer statements differ on access, though both indicate the full deliverable was not accessible.",
+      "citations": [
+        {
+          "source_id": "src-b0a90b0acb8578b8cca756a4",
+          "quote": "[SIMULATED] Buyer: The delivery link says access denied. I cannot open the service files.",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4538c2fe35e1dc16d67dd674",
+          "quote": "[SIMULATED] Buyer: I can now open the folder, but only 4 of the 10 agreed files are present. The other 6 are still missing.",
+          "occurrence": 0
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "title": "Independent verification of actual file contents/access",
+      "detail": "Neither the seller's assertion nor the buyer's reports are independently verified in the provided material. The synthetic chat messages do not establish the state of the delivery folder or how many agreed files were actually accessible.",
+      "citations": [
+        {
+          "source_id": "src-22691609f620abb14c0e75f8",
+          "quote": "[SIMULATED] Seller: I have uploaded all 10 service files to the project folder. Please check the delivery link.",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-4538c2fe35e1dc16d67dd674",
+          "quote": "[SIMULATED] Buyer: I can now open the folder, but only 4 of the 10 agreed files are present. The other 6 are still missing.",
+          "occurrence": 0
+        }
+      ],
+      "missing_evidence": true
+    },
+    {
+      "title": "Agreed scope of the 10 service files",
+      "detail": "The messages refer to '10 agreed files' and 'all 10 service files,' but no source in this set contains the underlying order/service description defining the agreed deliverables. Whether 10 files were contractually required is not shown here.",
+      "citations": [
+        {
+          "source_id": "src-4538c2fe35e1dc16d67dd674",
+          "quote": "only 4 of the 10 agreed files are present",
+          "occurrence": 0
+        },
+        {
+          "source_id": "src-22691609f620abb14c0e75f8",
+          "quote": "all 10 service files",
+          "occurrence": 0
+        }
+      ],
+      "missing_evidence": true
+    },
+    {
+      "title": "Outcome of seller's promised check of permissions and missing files",
+      "detail": "The seller says it will check folder permissions and the missing files; no later source in this set reports the result of that check, so availability of the remaining 6 files is unresolved.",
+      "citations": [
+        {
+          "source_id": "src-a225a62b33847e8008e31d24",
+          "quote": "[SIMULATED] Seller: Thank you for letting me know. I will check the folder permissions and the missing files.",
+          "occurrence": 0
+        }
+      ],
+      "missing_evidence": true
+    },
+    {
+      "title": "Current live dispute status",
+      "detail": "The dispute status UNDER_REVIEW comes only from a historical sandbox snapshot; the snapshot note explicitly says it is not a live fetch, so the present review stage of the dispute is not established.",
+      "citations": [
+        {
+          "source_id": "src-4c15b160192c427948366894",
+          "quote": "This is not the original API response, not production data, and not a live fetch.",
+          "occurrence": 0
+        }
+      ],
+      "missing_evidence": true
+    }
+  ],
+  "warnings": [
+    "All chat deliverable messages (seller delivery, buyer complaints, seller follow-up) are explicitly marked [SIMULATED] synthetic material and must not be treated as verified real communications or proof of delivery.",
+    "The dispute snapshot is a sanitized historical sandbox reconstruction, not an original API response, not production data, and not a live fetch; it is not proof of the dispute's current status.",
+    "The snapshot records a capture status of COMPLETED; capture completion is not evidence that the buyer received the agreed service.",
+    "A seller assertion of delivery is not buyer acceptance; the buyer reports only partial receipt (4 of 10 files).",
+    "Importer assertion annotations (buyer_nonreceipt, partial_delivery, seller_delivery_claim) are unverified hints, not established facts.",
+    "No source defines the agreed deliverables, and the currency amount (USD 1.00) appears in the sandbox snapshot only; do not treat it as verified real value without review.",
+    "The initial empty dispute list followed by later appearance of the dispute reflects sandbox behavior and timing; it should not be interpreted as evidence about underlying conduct."
+  ]
+}
